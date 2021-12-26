@@ -21,6 +21,12 @@ export default createStore({
     },
     helpMeInfos: [],
     helpYouInfos: [],
+    adminInfo: {
+      userInfos: [],
+      helpMeInfos: [],
+      helpYouInfos: [],
+      InterMediaryIncomes: [],
+    },
   },
   mutations: {
     setUserInfo(state, tUserInfo) {
@@ -35,6 +41,14 @@ export default createStore({
       state.helpYouInfos = _.clone(tHelpYouInfos);
       console.log("setHelpYouInfos res: ", state.helpYouInfos);
     },
+    setAdminInfo(state, tAdminInfo) {
+      state.adminInfo.userInfos = _.clone(tAdminInfo.userInfos);
+      state.adminInfo.helpMeInfos = _.clone(tAdminInfo.helpMeInfos);
+      state.adminInfo.helpYouInfos = _.clone(tAdminInfo.helpYouInfos);
+      state.adminInfo.InterMediaryIncomes = _.clone(
+        tAdminInfo.InterMediaryIncomes
+      );
+    },
   },
   actions: {
     async setUserInfo({ commit }, tUserInfo) {
@@ -45,6 +59,9 @@ export default createStore({
     },
     async setHelpYouInfos({ commit }, tHelpYouInfos) {
       commit("setHelpYouInfos", tHelpYouInfos);
+    },
+    async setAdminInfo({ commit }, tAdminInfo) {
+      commit("setAdminInfo", tAdminInfo);
     },
   },
   modules: {},

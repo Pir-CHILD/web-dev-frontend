@@ -102,7 +102,7 @@ export default {
       registerForm: {
         userName: "",
         userPwd: "",
-        userType: 0,
+        userType: 1,
         userXingming: "",
         certiType: 0,
         certiNumber: "",
@@ -225,8 +225,41 @@ export default {
           JSON.stringify(this.loginForm)
         );
         console.log(res);
-        await this.$store.dispatch("setUserInfo", res.data);
-        this.$router.push("/user");
+        if (this.loginForm.username !== "admin") {
+          await this.$store.dispatch("setUserInfo", res.data);
+          this.$router.push("/user");
+        } else {
+          try {
+            const tAdminInfo = {};
+
+            let res = await axios.post(
+              "http://localhost:9090/admin/search/userinfo"
+            );
+            console.log("userinfos res: ", res);
+            tAdminInfo.userInfos = res.data;
+
+            res = await axios.post("http://localhost:9090/admin/search/helpme");
+            console.log("helpmes res: ", res);
+            tAdminInfo.helpMeInfos = res.data;
+
+            res = await axios.post(
+              "http://localhost:9090/admin/search/helpyou"
+            );
+            console.log("helpyous res: ", res);
+            tAdminInfo.helpYouInfos = res.data;
+
+            res = await axios.post("http://localhost:9090/admin/search/income");
+            console.log("incomes res: ", res);
+            tAdminInfo.InterMediaryIncomes = res.data;
+
+            console.log("tAdminInfos: ", tAdminInfo);
+            await this.$store.dispatch("setAdminInfo", tAdminInfo);
+            // console.log("1111111", this.$store.state.adminInfo.helpMeInfos);
+            this.$router.push("/admin");
+          } catch (error) {
+            console.log("Admin login error: ", error);
+          }
+        }
       } catch (err) {
         ElMessage.error("用户名或密码错误！");
         console.log(err);

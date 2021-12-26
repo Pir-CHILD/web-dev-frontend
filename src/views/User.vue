@@ -67,10 +67,10 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { Avatar, Help, HelpFilled } from "@element-plus/icons";
-import UserInfo from "../components/UserInfo.vue";
-import HelpMeRelease from "../components/HelpMeRelease.vue";
-import HelpMeSearch from "../components/HelpMeSearch.vue";
-import HelpYouSearch from "../components/HelpYouSearch.vue";
+import UserInfo from "../components/Users/UserInfo.vue";
+import HelpMeRelease from "../components/Users/HelpMeRelease.vue";
+import HelpMeSearch from "../components/Users/HelpMeSearch.vue";
+import HelpYouSearch from "../components/Users/HelpYouSearch.vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { ElMessage } from "element-plus";
